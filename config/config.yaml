@@ -62,7 +62,7 @@ schedule:
 #     只要 api_url 不是你自己部署的实例，都推荐配置 expected_domain
 # ===============================================================
 platforms:
-  enabled: false                         # 关闭热榜，只用 RSS 追踪指定人物
+  enabled: true                         # 启用热榜 + RSS 追踪
   api_url: ""                            # 热榜数据 API 地址（留空使用默认地址）
                                         # 如果你自行部署了 newsnow，填入你的地址，如: https://your-domain.com/api/s
   sources:
@@ -220,11 +220,13 @@ display:
   # 调整顺序：剪切粘贴整行即可
   # 要显示某个区域，需同时：1. 在此列表中  2. 下方 regions 对应开关为 true
   region_order:
-    - rss                                 # 只显示 RSS
+    - new_items                           # 新增热点
+    - hotlist                             # 热榜（关键词筛选）
+    - rss                                 # RSS 追踪
 
   # 推送区域开关（需配合上方 region_order 使用）
   regions:
-    hotlist: false                    # 关闭热榜显示（只用 RSS）
+    hotlist: true                     # 显示热榜（关键词筛选）
     new_items: false                  # 新增热点区域
 
     rss: true                         # RSS 订阅区域
