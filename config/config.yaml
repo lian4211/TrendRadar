@@ -62,7 +62,7 @@ schedule:
 #     只要 api_url 不是你自己部署的实例，都推荐配置 expected_domain
 # ===============================================================
 platforms:
-  enabled: true                         # 启用热榜 + RSS 追踪
+  enabled: false                         # 关闭国内热榜，专注推特 RSS 追踪
   api_url: ""                            # 热榜数据 API 地址（留空使用默认地址）
                                         # 如果你自行部署了 newsnow，填入你的地址，如: https://your-domain.com/api/s
   sources:
@@ -118,7 +118,7 @@ rss:
   freshness_filter:
     enabled: true                     # 是否启用新鲜度过滤（true=启用, false=关闭）
 
-    max_age_days: 1                   # 最大文章年龄（天）
+    max_age_days: 3                   # 推特追踪：3天内的推文
                                       # - 正整数：只推送 N 天内的文章
                                       # - 0：禁用过滤，推送所有文章
 
@@ -220,9 +220,7 @@ display:
   # 调整顺序：剪切粘贴整行即可
   # 要显示某个区域，需同时：1. 在此列表中  2. 下方 regions 对应开关为 true
   region_order:
-    - new_items                           # 新增热点
-    - hotlist                             # 热榜（关键词筛选）
-    - rss                                 # RSS 追踪
+    - rss                                 # 只显示 RSS 推特追踪
 
   # 推送区域开关（需配合上方 region_order 使用）
   regions:
@@ -462,9 +460,9 @@ advanced:
   # RSS 设置
   rss:
     request_interval: 1000            # 请求间隔（毫秒）
-    timeout: 15                       # 请求超时（秒）
-    use_proxy: false                  # 是否使用代理（true=启用, false=不使用）
-    proxy_url: ""                     # RSS 专属代理（留空则使用 crawler.default_proxy）
+    timeout: 30                       # 请求超时（秒），Nitter 较慢
+    use_proxy: true                   # 国内访问 Nitter 需要代理
+    proxy_url: "http://127.0.0.1:10801"
 
   # 排序权重（用于重新排序不同平台的热搜）
   # 合起来等于 1
